@@ -14,6 +14,7 @@ import "@thirdweb-dev/contracts/extension/PrimarySale.sol";
 import "@thirdweb-dev/contracts/extension/DropSinglePhase.sol";
 import "@thirdweb-dev/contracts/extension/LazyMint.sol";
 import "@thirdweb-dev/contracts/extension/DelayedReveal.sol";
+import "@thirdweb-dev/contracts/extension/PermissionsEnumerable.sol";
 
 import "@thirdweb-dev/contracts/lib/Strings.sol";
 import { CurrencyTransferLib } from "@thirdweb-dev/contracts/lib/CurrencyTransferLib.sol";
@@ -51,7 +52,8 @@ contract ERC721Drop is
     PrimarySale,
     LazyMint,
     DelayedReveal,
-    DropSinglePhase
+    DropSinglePhase,
+    PermissionsEnumerable
 {
     using Strings for uint256;
 
@@ -294,6 +296,11 @@ contract ERC721Drop is
 
     /// @dev Checks whether NFTs can be revealed in the given execution context.
     function _canReveal() internal view virtual returns (bool) {
+        return msg.sender == owner();
+    }
+
+    /// @dev Returns whether platform fee info can be set in the given execution context.
+    function _canSetPlatformFeeInfo() internal view virtual returns (bool) {
         return msg.sender == owner();
     }
 

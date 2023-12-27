@@ -80,6 +80,7 @@ contract ERC721Drop is
         address _primarySaleRecipient
     ) ERC721A(_name, _symbol) {
         _setupOwner(_defaultAdmin);
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupDefaultRoyaltyInfo(_royaltyRecipient, _royaltyBps);
         _setupPrimarySaleRecipient(_primarySaleRecipient);
     }

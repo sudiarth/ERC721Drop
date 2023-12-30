@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./ERC721Drop.sol";
 
-contract SudigitalNFTDrop is ERC721Drop {
+contract SudigitalERC721Drop is ERC721Drop {
     constructor(
         address _defaultAdmin,
         string memory _name,
